@@ -1,0 +1,48 @@
+body{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  height: 100vh;
+}
+
+.card-container{
+  background-color: white;
+  border: 1px solid;
+  border-radius: 5%;
+  display: grid;
+  width: 32rem;
+  height: 35rem;
+  margin: auto;
+  margin-top: 20px;
+  text-align: center;
+  padding-top: 4rem ;
+  grid-template-rows: 1fr 1fr ;
+  gap: 10px;
+}
+.search{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr ;
+  gap: 10px;
+  height: 10eem;
+  text-align: center;
+}
+label{
+  display: grid;
+  font-size: large;
+  text-align: center;
+  justify-content: center;
+}
+
+input , button{
+  height: 2em;
+  width: 12rem;
+  
+}
+
+.details{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+}
+
+
