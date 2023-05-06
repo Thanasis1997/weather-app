@@ -3,59 +3,65 @@ import { useEffect, useState } from 'react';
 import './App.css';
 
 
+
 function App() {
   const [city, setCity] = useState("")
-  const [weather, setWeather] = useState({})
+  const [data, setData] = useState({})
   const api= process.env.REACT_APP_API_KEY;
   // console.log(api);
+ 
+    
+    
   
   const handleChange = (e) =>{
-    
+
     setCity(e.target.value)
     
     
   }
     
-    const getWeather = () =>{
-  
-  
-  
-    
-        fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${api}`)
+    const getWeather = (e) =>{
+      e.preventDefault();
+        fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${api}&units=metric `)
         .then(res => res.json())
-        .then(data => setWeather(data))
+        .then(response => {setData(response); setCity("")})
 
-        console.log(city);
+        // console.log(city);
 
   
     
   }
   
   return (
- <>
+ 
 
-{
+
+
+  <div className='app'>
+    <h1>Weather app</h1>
   <div className="card-container">
         <div className='search'>
         
-        <label htmlFor="input">Search a city</label>
-        <input type="text" placeholder='e.g London'onChange={handleChange} value={city}/>
-        <button onClick={getWeather}>click</button>
-
+      <form onSubmit={getWeather}>
+        <input type="text" placeholder="Enter Location"onChange={handleChange} value={city}/>
+        {/* <label className='enter-location'>Enter Location</label> */}
+        <button>Search</button>
+        </form>
 
         </div>
         <div className='details'>
-          <span className='location'>Location: <p>{weather.name}</p></span>
-          <span className='degrees'>Degrees: </span>
-
-          <span className='wind'>Wind: </span>
+          <span className='location'>{data.name} </span>
+          {data.main ?  <span className='degrees'>Degrees: {data.main.temp}°C </span> : <span className='degrees'>Degrees: </span>}
+          {data.wind ? <span className='wind'>Wind: {data.wind.speed} m/s</span> : <span className='wind'>Wind: </span>}
+          
         </div>
 
 
 
       </div>
-}
- </>
+      </div>
+
+
 
   )
 }
